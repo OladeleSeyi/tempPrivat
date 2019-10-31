@@ -11,7 +11,8 @@ const db = require("./config/db");
 
 // import Routes
 const authRoute = require("./routes/authRoute");
-const mapDataRoute = require("./routes/mapDataRoute");
+const testauth = require("./routes/test/auth");
+const stateRoute = require("./routes/state");
 const userRoute = require("./routes/userRoute");
 //  Start App
 const app = express();
@@ -27,6 +28,11 @@ app.use(
 	})
 );
 app.use(bodyParser.json());
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport config
+require("./config/passport")(passport);
 
 // // Declare Routes
 app.get("/", (req, res) => {
@@ -34,6 +40,9 @@ app.get("/", (req, res) => {
 	console.log(Date.now());
 });
 app.use("/auth", authRoute);
+app.use("/test", testauth);
+app.use("/state", stateRoute);
+
 // app.use("/data", mapDataRoute);
 // app.use("/user", userRoute);
 
