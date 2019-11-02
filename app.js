@@ -36,19 +36,21 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // // Declare Routes
-app.get("/", (req, res) => {
-	res.send("Hello World ");
-	console.log(Date.now());
+app.use(express.static("client/build"));
+app.get("*", (req, res) => {
+	res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 });
 app.use("/auth", authRoute);
 app.use("/test", testauth);
 app.use("/state", passport.authenticate("jwt", { session: false }), stateRoute);
 
+// Serve static assets if in production
 if (process.env.NODE_ENV === "production") {
+	// Set static folder
 	app.use(express.static("client/build"));
 
 	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(_dirname, "client", "build", "index.html"));
+		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 	});
 }
 
