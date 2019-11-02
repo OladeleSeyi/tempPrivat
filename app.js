@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const helmet = require("helmet");
+const path = require("path");
 
 const logger = require("./config/logger");
 // Import Local Dependencies
