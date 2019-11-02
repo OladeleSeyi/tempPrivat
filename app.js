@@ -41,10 +41,15 @@ app.get("/", (req, res) => {
 });
 app.use("/auth", authRoute);
 app.use("/test", testauth);
-app.use("/state", stateRoute);
+app.use("/state", passport.authenticate("jwt", { session: false }), stateRoute);
 
-// app.use("/data", mapDataRoute);
-// app.use("/user", userRoute);
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static("client/build"));
+
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(_dirname, "client", "build", "index.html"));
+	});
+}
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

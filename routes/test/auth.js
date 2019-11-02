@@ -4,6 +4,8 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
 
+//  Test the auuthentication route
+
 router.get(
 	"/success",
 	passport.authenticate("jwt", { session: false }),

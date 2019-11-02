@@ -50,7 +50,7 @@ const stateDataSchema = new Schema({
 		max: 5,
 		min: 0
 	},
-	useofIct: {
+	useOfIct: {
 		type: Number,
 		required: true,
 		max: 5,
@@ -80,13 +80,13 @@ const stateDataSchema = new Schema({
 		max: 3,
 		min: 0
 	},
-	ict4learning: {
+	ict4Learning: {
 		type: Number,
 		required: true,
 		max: 3,
 		min: 0
 	},
-	ict4judiciary: {
+	ict4Judiciary: {
 		type: Number,
 		required: true,
 		max: 3,
@@ -104,7 +104,7 @@ const stateDataSchema = new Schema({
 		max: 2,
 		min: 0
 	},
-	videoConfrence: {
+	videoConference: {
 		type: Number,
 		required: true,
 		max: 1,
@@ -117,6 +117,12 @@ const stateDataSchema = new Schema({
 		min: 0
 	},
 	stateId: {
+		type: String,
+		required: true,
+		minlength: 5,
+		trim: true
+	},
+	authorId: {
 		type: String,
 		required: true,
 		minlength: 5,
