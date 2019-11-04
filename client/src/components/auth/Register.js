@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 
-import "./auth.scss";
+import "./Auth.scss";
 
 class Register extends Component {
 	constructor() {
@@ -23,7 +22,7 @@ class Register extends Component {
 	}
 
 	componentDidMount() {
-		// Redirect logged in users to Register Page
+		// If logged in and user navigates to Register page, should redirect them to dashboard
 		if (this.props.auth.isAuthenticated) {
 			this.props.history.push("/dashboard");
 		}
@@ -51,17 +50,18 @@ class Register extends Component {
 			password: this.state.password,
 			password2: this.state.password2,
 			state: this.state.state,
-			contactNo: this.state.contactNo,
-			errors: {}
+			contactNo: this.state.contactNo
 		};
+
 		this.props.registerUser(newUser, this.props.history);
 	};
 
 	render() {
 		const { errors } = this.state;
+
 		return (
 			<div className="base-wrapper">
-				<div className="auth-header">Register to Begin</div>
+				<div className="auth-header">Register Below</div>
 				<form className="auth-form" noValidate onSubmit={this.onSubmit}>
 					<div className="auth-group">
 						<label>
@@ -153,11 +153,12 @@ class Register extends Component {
 	}
 }
 
-registerUser.propTypes = {
+Register.propTypes = {
 	registerUser: PropTypes.func.isRequired,
 	auth: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired
 };
+
 const mapStateToProps = state => ({
 	auth: state.auth,
 	errors: state.errors
