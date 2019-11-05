@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const helmet = require("helmet");
 const path = require("path");
+const cors = require("cors");
 
 const logger = require("./config/logger");
 // Import Local Dependencies
@@ -20,6 +21,7 @@ const app = express();
 
 //  Security
 app.use(helmet());
+app.use(cors());
 
 // set up middleware
 app.use(logger("combined", logger.options));
@@ -36,13 +38,8 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // // Declare Routes
-app.use(express.static("client/build"));
-app.get("*", (req, res) => {
-	res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-});
-app.use("/auth", authRoute);
-app.use("/test", testauth);
-app.use("/state", passport.authenticate("jwt", { session: false }), stateRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/state", stateRoute);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {

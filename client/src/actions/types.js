@@ -18,3 +18,11 @@ export const UPDATE_TASK = "UPDATE_TASK";
 export const DELETE_TASK = "DELETE_TASK";
 export const GET_TASKS = "GET_TASKS";
 export const TASKS_LOADING = "TASKS_LOADING";
+
+// States
+export const ADD_STATE = "ADD_STATE";
+export const GET_STATES = "GET_STATES";
+export const UPDATE_STATE = "UPDATE_STATE";
+export const GET_STATE = "GET_STATE";
+export const STATES_LOADING = "STATES_LOADING";
+export const STATE_LOADING = "STATE_LOADING";

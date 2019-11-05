@@ -33,7 +33,6 @@ router.post("/register", (req, res) => {
 	const userId = req.body.userId;
 	User.findOne({ userId }).then(user => {
 		console.log("user", user);
-
 		if (!user) {
 			return res.status(400).json({ userId: "Invalid UserId" });
 		} else if (user.email) {

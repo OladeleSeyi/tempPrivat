@@ -1,21 +1,21 @@
 @import "../../styles/base.scss";
 
 .wrapper {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .right {
-  display: flex;
-  flex-direction: column;
-  min-width: 900px;
-  width: 100%;
-  margin-left: 225px;
-  z-index: 0;
-  transition: margin-left 0.25s ease 0s;
+	display: flex;
+	flex-direction: column;
+	min-width: 900px;
+	width: 100%;
+	margin-left: 10%;
+	z-index: 0;
+	transition: margin-left 0.25s ease 0s;
 }
 
 .no-side {
-  margin-left: 0px;
-  transition: margin-left 0.25s ease 0s;
+	margin-left: 0px;
+	transition: margin-left 0.25s ease 0s;
 }

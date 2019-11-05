@@ -136,6 +136,20 @@ class Register extends Component {
 							<div className="auth-error">{errors.password}</div>
 						</label>
 					</div>
+					<div className="auth-group">
+						<label>
+							<div className="auth-label">Repeat Password</div>
+							<input
+								onChange={this.onChange}
+								value={this.state.password2}
+								error={errors.password2}
+								id="password2"
+								type="password"
+								className="auth-input"
+							/>
+							<div className="auth-error">{errors.password2}</div>
+						</label>
+					</div>
 
 					<div>
 						<button type="submit" className="auth-button">

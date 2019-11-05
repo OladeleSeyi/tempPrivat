@@ -122,6 +122,11 @@ const stateDataSchema = new Schema({
 		minlength: 5,
 		trim: true
 	},
+	stateName: {
+		type: String,
+		required: true,
+		trim: true
+	},
 	authorId: {
 		type: String,
 		required: true,
