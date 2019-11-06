@@ -15,7 +15,7 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
-import Layout from "./components/dashboard/Layout";
+
 import NotFound from "./components/404/404";
 import Lay from "./components/dashboard/Lay";
 
@@ -23,9 +23,9 @@ import Lay from "./components/dashboard/Lay";
 import "./App.scss";
 
 // Check for token to keep user logged in
-if (localStorage.jwtTokenTeams) {
+if (localStorage.jwtToken) {
 	// Set auth token header auth
-	const token = JSON.parse(localStorage.jwtTokenTeams);
+	const token = JSON.parse(localStorage.jwtToken);
 	setAuthToken(token);
 
 	// Decode token and get user info and exp
@@ -56,9 +56,7 @@ class App extends Component {
 							<Route exact path="/register" component={Register} />
 							{/* <PrivateRoute exact path="/dashboard" component={Layout} /> */}
 							<PrivateRoute exact path="/dashboard" component={Lay} />
-							<Route
-								component={localStorage.jwtTokenTeams ? Layout : NotFound}
-							/>
+							<Route component={localStorage.jwtTokenTeams ? Lay : NotFound} />
 						</Switch>
 					</div>
 				</Router>

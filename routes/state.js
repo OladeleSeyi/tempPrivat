@@ -5,6 +5,30 @@ const passport = require("passport");
 const StateData = require("../models/statedata");
 // import validator
 const validateStateInput = require("../validator/state");
+const updateStateInput = require("../validator/state");
+let getTotal = data => {
+	let total =
+		eval(data.proportionOfBudget) +
+		eval(data.ictMinistry) +
+		eval(data.internetAccessRate) +
+		eval(data.ictProjects) +
+		eval(data.skillTypeA) +
+		eval(data.stateWebsite) +
+		eval(data.officialMailUse) +
+		eval(data.ictFund) +
+		eval(data.useOfIct) +
+		eval(data.genAbility) +
+		eval(data.digitalFiling) +
+		eval(data.intranetUse);
+	eval(data.ehr) +
+		eval(data.ict4Learning) +
+		eval(data.ict4Employment) +
+		eval(data.ict4Judiciary) +
+		eval(data.techAbility) +
+		eval(data.videoConference);
+
+	return total;
+};
 
 // Get all route
 router.get("/", (req, res) => {
@@ -34,26 +58,7 @@ router.post(
 
 		//  get the senders id
 		let user = req.user.userId;
-		let total =
-			eval(req.body.proportionOfBudget) +
-			eval(req.body.ictMinistry) +
-			eval(req.body.internetAccessRate) +
-			eval(req.body.ictProjects) +
-			eval(req.body.skillTypeA) +
-			eval(req.body.stateWebsite) +
-			eval(req.body.officialMailUse) +
-			eval(req.body.ictFund) +
-			eval(req.body.useOfIct) +
-			eval(req.body.genAbility) +
-			eval(req.body.digitalFiling) +
-			eval(req.body.intranetUse) +
-			eval(req.body.ehr) +
-			eval(req.body.ict4Learning) +
-			eval(req.body.ict4Employment) +
-			eval(req.body.ict4Judiciary) +
-			eval(req.body.techAbility) +
-			eval(req.body.videoConference);
-		console.log(total);
+		let total = getTotal(req.body);
 
 		//Check if stateId and stateUserIds Match
 
@@ -90,6 +95,43 @@ router.post(
 	}
 );
 // Edit state information
+router.patch(
+	"/put/:id",
+	passport.authenticate("jwt", { session: false }),
+	(req, res) => {
+		let id = req.params.id;
+		console.log(req.body);
+		let { isValid, errors } = updateStateInput(req.body);
+		if (!isValid) {
+			console.log(errors);
+
+			return res.status(400).json(errors);
+		}
+		let user = req.user.userId;
+
+		let state = { ...req.body };
+		StateData.findOne({ stateId: id }).then(data => {
+			if (!data) {
+				return res.status(404).json({ stateId: "This State doesn't exist" });
+			} else if (!(data.authorId === user)) {
+				return res
+					.status(400)
+					.json({ stateName: "You are not permitted to update this" });
+			}
+			let total = getTotal(req.body);
+
+			state.total = total;
+			let newStateData = { ...state };
+			StateData.updateOne(
+				{ stateId: id, authorId: user },
+				{ $set: newStateData },
+				{ multi: true, new: true }
+			)
+				.then(doc => res.json(doc))
+				.catch(err => console.log(err));
+		});
+	}
+);
 
 // delete state info
 
@@ -113,14 +155,13 @@ router.get(
 // FInd just one state
 router.get("/single/:id", (req, res) => {
 	// Get the state id
-	console.log("id");
 
 	let id = req.params.id;
 	StateData.findOne({ stateId: id }).then(data => {
 		if (!data) {
 			return res
-				.status(400)
-				.json({ stateId: "PLease ensure you have a valid state Id" });
+				.status(404)
+				.json({ stateId: "Please ensure you have a valid state Id" });
 		}
 		return res.status(200).json(data);
 	});

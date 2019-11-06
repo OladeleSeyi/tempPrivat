@@ -29,6 +29,22 @@ export const addState = stateData => dispatch => {
 			})
 		);
 };
+export const updateState = (id, stateData) => dispatch => {
+	axios
+		.patch(`/api/state/put/${id}`, stateData)
+		.then(res => {
+			dispatch({
+				type: UPDATE_STATE,
+				payload: res.data
+			});
+		})
+		.catch(err =>
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			})
+		);
+};
 
 // Get all states data
 export const getStates = () => dispatch => {

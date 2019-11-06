@@ -50,14 +50,6 @@ class Login extends Component {
 		this.props.loginUser(userData);
 	};
 
-	fillDemoEmail = () => {
-		this.setState({ email: "test@test.com" });
-	};
-
-	fillDemoPassword = () => {
-		this.setState({ password: "test123" });
-	};
-
 	render() {
 		const { errors } = this.state;
 

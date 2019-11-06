@@ -4,33 +4,32 @@ import "./Dashboard.scss";
 
 import { connect } from "react-redux";
 
-import Modal from "./Modal/Modal";
+import MyModal from "./Modal/MyModal";
 import StateForm from "./StateForm/StateForm";
 
 class Dashboard extends Component {
+	// Add the state data empty object
 	state = {
 		modal: false,
 		edit: false,
-		name: "",
-		members: [],
-		id: "",
-		owner: {}
+		stateName: "",
+		stateId: "",
+		stateData: {}
 	};
 
+	// pass in the state to be edited
 	toggleModal = e => {
 		this.setState({ modal: !this.state.modal, edit: false });
 	};
 
-	toggleEditModal = (name, members, id, owner, e) => {
+	toggleEditModal = (name, id, data, e) => {
 		e.stopPropagation();
-
 		this.setState({
 			modal: !this.state.modal,
 			edit: !this.state.edit,
-			name: name,
-			members: members,
-			id: id,
-			owner: owner
+			stateName: name,
+			stateId: id,
+			stateData: data
 		});
 	};
 
@@ -51,9 +50,8 @@ class Dashboard extends Component {
 					onClick={this.toggleEditModal.bind(
 						this,
 						state.stateName,
-
 						state.stateId,
-						state.authorId
+						state
 					)}
 				>
 					Edit project
@@ -70,14 +68,13 @@ class Dashboard extends Component {
 						Create Another State
 					</button>
 					<div className="modal-wrapper">
-						<Modal
+						<MyModal
 							onClose={this.toggleModal}
 							modal={this.state.modal}
 							edit={this.state.edit}
-							name={this.state.name}
-							members={this.state.members}
-							id={this.state.id}
-							owner={this.state.owner}
+							name={this.state.stateName}
+							id={this.state.stateId}
+							data={this.state.stateData}
 						/>
 					</div>
 					<div className="projects-wrapper">{statesData}</div>
@@ -91,10 +88,10 @@ class Dashboard extends Component {
 						<div className="no-projects">
 							<h1 className="header">Enter States Data</h1>
 							<button className="main-btn" onClick={this.toggleModal}>
-								Enter State Data
+								Create State Data
 							</button>
 							<div className="modal-wrapper">
-								<StateForm />
+								<MyModal onClose={this.toggleModal} modal={this.state.modal} />
 							</div>
 						</div>
 					</div>
@@ -106,7 +103,6 @@ class Dashboard extends Component {
 			<div className="main-content">
 				<h1 className="header">State Data</h1>
 				{content}
-				<StateForm />
 			</div>
 		);
 	}

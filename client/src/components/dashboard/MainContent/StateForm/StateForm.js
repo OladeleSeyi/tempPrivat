@@ -10,24 +10,24 @@ class StateForm extends Component {
 	constructor() {
 		super();
 		this.state = {
-			proportionOfBudget: " ",
-			ictMinistry: " ",
-			internetAccessRate: " ",
-			ictProjects: " ",
-			skillTypeA: " ",
-			stateWebsite: " ",
-			officialMailUse: " ",
-			ictFund: " ",
-			useOfIct: " ",
-			genAbility: " ",
-			digitalFiling: " ",
-			intranetUse: " ",
-			ehr: " ",
-			ict4Learning: " ",
-			ict4Judiciary: " ",
-			techAbility: " ",
-			ict4Employment: " ",
-			videoConference: " ",
+			proportionOfBudget: "",
+			ictMinistry: "",
+			internetAccessRate: "",
+			ictProjects: null,
+			skillTypeA: "",
+			stateWebsite: "",
+			officialMailUse: "",
+			ictFund: "",
+			useOfIct: "",
+			genAbility: "",
+			digitalFiling: "",
+			intranetUse: "",
+			ehr: "",
+			ict4Learning: "",
+			ict4Judiciary: "",
+			techAbility: "",
+			ict4Employment: "",
+			videoConference: "",
 			stateId: "",
 			stateName: "",
 			errors: {}
@@ -74,7 +74,7 @@ class StateForm extends Component {
 	render() {
 		const { errors } = this.state;
 		return (
-			<div className="modal">
+			<div className="">
 				<h1 className="header">Fill in State Info</h1>
 
 				<form className="auth-form" onSubmit={this.onAddState}>
