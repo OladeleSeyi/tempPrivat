@@ -30,13 +30,7 @@ class myModal extends Component {
 	}
 
 	onChange = e => {
-		if (["name", "email"].includes(e.target.name)) {
-			let members = [...this.state.members];
-			members[e.target.dataset.id][e.target.name] = e.target.value;
-			this.setState({ members });
-		} else {
-			this.setState({ [e.target.id]: e.target.value });
-		}
+		this.setState({ [e.target.id]: e.target.value });
 	};
 
 	onChance = e => {
@@ -68,25 +62,26 @@ class myModal extends Component {
 	};
 
 	onUpState = async e => {
-		e.preventDefault();
+		// e.preventDefault();
 
-		function toString(o) {
-			Object.keys(o).forEach(k => {
-				if (typeof o[k] === "object") {
-					return toString(o[k]);
-				}
+		// function toString(o) {
+		// 	Object.keys(o).forEach(k => {
+		// 		if (typeof o[k] === "object") {
+		// 			return toString(o[k]);
+		// 		}
 
-				o[k] = "" + o[k];
-			});
+		// 		o[k] = "" + o[k];
+		// 	});
 
-			return o;
-		}
+		// 	return o;
+		// }
 
 		let newState = toString(this.state.stateData);
+		console.log("save");
 
-		await this.props.updateState(this.state.stateId, newState);
-		this.onClose();
-		window.location.reload();
+		// await this.props.updateState(this.state.stateId, newState);
+		// this.onClose();
+		// window.location.reload();
 	};
 
 	render() {
