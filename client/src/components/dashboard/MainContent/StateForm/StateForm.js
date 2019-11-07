@@ -88,7 +88,6 @@ class StateForm extends Component {
 								value={this.state.stateName}
 								error={errors.stateName}
 								onChange={this.onChange}
-								className="form-input"
 							/>
 							<div className="auth-error">{errors.stateName}</div>
 						</label>
