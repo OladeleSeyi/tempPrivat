@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A Fullstack App for collecting and visualizng ICT usage and Penetration Data.",
   "main": "app.js",
+  "engines": {
+    "node": "10.8.0"
+  },
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node app.js",

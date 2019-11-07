@@ -5,7 +5,6 @@ import "./Dashboard.scss";
 import { connect } from "react-redux";
 
 import MyModal from "./Modal/MyModal";
-import StateForm from "./StateForm/StateForm";
 
 class Dashboard extends Component {
 	// Add the state data empty object
